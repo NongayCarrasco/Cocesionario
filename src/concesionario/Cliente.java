@@ -14,16 +14,25 @@ import java.util.logging.Logger;
  */
 public class Cliente extends Thread {
     public static final int NUM_CLIENTES = 9; //Constante que define el número de clientes en total
-    private final int idCliente; //ID de cada cliente
-    private final Semaphore semaforo; //Semáforo que controlará cuantos clientes podrán acceder a los coches 
-    private final Coche[] coches; //Array que contiene los 4 coches
+    private final int idCliente;
+    private final Semaphore semaforo;  
+    private final Coche[] coches; 
 
+    /**
+     * Constructor por parámetros
+     * @param idCliente id de cada cliente
+     * @param semaforo Semáforo que controlará cuantos clientes podrán acceder a los coches
+     * @param coches Array que contiene los 4 coches
+     */
     public Cliente(int idCliente, Semaphore semaforo, Coche[] coches) {
         this.idCliente = idCliente;
         this.semaforo = semaforo;
         this.coches = coches;
     }
     
+    /**
+     * Método que le da funcionalidad al hilo que se va a ejecutar
+     */
     @Override
     public void run(){
         try {
@@ -48,7 +57,11 @@ public class Cliente extends Thread {
             semaforo.release();
         }
     }
-        
+    
+    /**
+     * Simula el momento en el que el cliente está probando un coche
+     * @param coche Coche que está probando el cliente
+     */
     private void probarCoche(Coche coche){
         System.out.println("Cliente " + idCliente + " probando vehiculo " + coche.getIdCoche());
        
